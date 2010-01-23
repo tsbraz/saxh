@@ -52,12 +52,10 @@ public class Parser implements Iterable<Node> {
             boolean readNeeded = true;
             boolean iterated = false;
 
-            @Override
             public void remove() {
                 throw new UnsupportedOperationException();
             }
 
-            @Override
             public Node next() {
                 if (readNeeded) {
                     reader.readTag();
@@ -76,7 +74,6 @@ public class Parser implements Iterable<Node> {
                 return node;
             }
 
-            @Override
             public boolean hasNext() {
                 if (iterated && mainTag.equals(reader.tagMap.get(TAG_MAP_TAG_NAME)) && reader.tagMap.containsKey(TAG_MAP_TAG_CLOSE)) {
                     return false;

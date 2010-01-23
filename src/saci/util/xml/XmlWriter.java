@@ -33,10 +33,12 @@ class XmlWriter {
     private boolean prettyPrint, prettyPrintCloseTag;
     private int level;
     private Writer writer;
+    private String charsetName;
     private XmlMapper mapper = new XmlMapper();
 
-    XmlWriter(Writer writer, boolean prettyPrint) {
+    XmlWriter(Writer writer, String charsetName, boolean prettyPrint) {
         setWriter(writer);
+        this.charsetName = charsetName == null ? java.nio.charset.Charset.defaultCharset().name() : charsetName;
         this.prettyPrint = prettyPrint;
     }
 
@@ -89,7 +91,7 @@ class XmlWriter {
 
     private void writeEncodingInfo() throws IOException {
         write("<?xml version=\"1.0\" encoding=\"");
-        write(java.nio.charset.Charset.defaultCharset().name());
+        write(charsetName);
         write("\"?>");
     }
 

@@ -69,7 +69,6 @@ class BeanParser extends XmlReader {
         return fillBean(bean, tagName, null);
     }
 
-    @SuppressWarnings("unchecked")
     protected boolean fillBean(Object bean, String tagName, String fieldName) throws IllegalAccessException, InstantiationException {
         XmlMap map = mapper.mapBean(bean);
         if (Types.isNullOrEmpty(tagName)) {
@@ -120,7 +119,8 @@ class BeanParser extends XmlReader {
         return false;
     }
 
-    private boolean fillList(ComplexType complexType, String subTagName, FieldMap field, Object bean) throws IllegalAccessException, NegativeArraySizeException, InstantiationException {
+    @SuppressWarnings("unchecked")
+	private boolean fillList(ComplexType complexType, String subTagName, FieldMap field, Object bean) throws IllegalAccessException, NegativeArraySizeException, InstantiationException {
         boolean subTagReaded;
         boolean objectFilled;
         do {
@@ -148,7 +148,8 @@ class BeanParser extends XmlReader {
         return subTagReaded;
     }
 
-    private void fillMap(String subTagName, ComplexType complexType, FieldMap field) throws InstantiationException, IllegalAccessException, RuntimeException {
+    @SuppressWarnings("unchecked")
+	private void fillMap(String subTagName, ComplexType complexType, FieldMap field) throws InstantiationException, IllegalAccessException, RuntimeException {
         while (!isEndTag(subTagName, true)) {
             if ("Entry".equals(tagMap.get(TAG_MAP_TAG_NAME))) {
                 readTag();

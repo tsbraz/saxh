@@ -26,6 +26,6 @@ class MapEntry<K,V> {
     static class Entry<K,V> {
         public K key;
         public V value;
-        public Class type;
+        public Class<?> type;
     }
 }
